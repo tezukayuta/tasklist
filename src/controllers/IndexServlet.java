@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,14 +34,18 @@ public class IndexServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        response.getWriter().append("Served at: ").append(request.getContextPath());
-
         EntityManager em = DBUtil.createEntityManager();
-        List<Tasks> tasks = em.createNamedQuery("getAllTasks", Tasks.class).getResultList();
-        response.getWriter().append(Integer.valueOf(tasks.size()).toString());
+
+        List<Tasks> Tasks = em.createNamedQuery("getAllTasks", Tasks.class).getResultList();
 
         em.close();
 
-    }
+        request.setAttribute("Tasks", Tasks);
 
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/Tasks/index.jsp");
+        rd.forward(request, response);
+    }
 }
+
+
+
