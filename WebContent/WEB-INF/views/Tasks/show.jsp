@@ -7,10 +7,26 @@
             <c:when test="${Tasks != null}">
                 <h2>id : ${Tasks.id} のメッセージ詳細ページ</h2>
 
-
-                <p>メッセージ：<c:out value="${Tasks.content}" /></p>
-                <p>作成日時：<fmt:formatDate value="${Tasks.created_at}" pattern="yyyy-MM-dd HH:mm:ss" /></p>
-                <p>更新日時：<fmt:formatDate value="${Tasks.updated_at}" pattern="yyyy-MM-dd HH:mm:ss" /></p>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>タイトル</th>
+                            <td><c:out value="${Tasks.title}" /></td>
+                        </tr>
+                        <tr>
+                            <th>メッセージ</th>
+                            <td><c:out value="${Tasks.content}" /></td>
+                        </tr>
+                        <tr>
+                            <th>作成日時</th>
+                            <td><fmt:formatDate value="${Tasks.created_at}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                        </tr>
+                        <tr>
+                            <th>更新日時</th>
+                            <td><fmt:formatDate value="${Tasks.updated_at}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                        </tr>
+                    </tbody>
+                </table>
 
                 <p><a href="${pageContext.request.contextPath}/index">一覧に戻る</a></p>
                 <p><a href="${pageContext.request.contextPath}/edit?id=${Tasks.id}">このメッセージを編集する</a></p>
